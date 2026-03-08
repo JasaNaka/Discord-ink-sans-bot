@@ -41,13 +41,14 @@ client.on("messageCreate", async (message) => {
 
   if (found) {
 
-    // character response
+    // xoá tin nhắn chứa từ cấm
+    await message.delete().catch(() => {});
+
     const response =
       inkResponses[Math.floor(Math.random() * inkResponses.length)];
 
-    message.reply(response);
+    message.channel.send(`${message.author} ${response}`);
 
-    // send log to staff
     const logChannel = client.channels.cache.get(LOG_CHANNEL_ID);
 
     if (logChannel) {
